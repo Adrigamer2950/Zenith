@@ -13,7 +13,8 @@ repositories {
 }
 
 dependencies {
-
+    implementation(libs.slf4j.provider)
+    implementation(libs.jansi)
 }
 
 kotlin {

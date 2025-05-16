@@ -1,6 +1,14 @@
 [versions]
+# Libraries
+jansi = "2.4.1"
+slf4j = "2.0.17"
+
 # Plugins
 shadow = "8.3.6"
+
+[libraries]
+jansi = { group = "org.fusesource.jansi", name = "jansi", version.ref = "jansi" }
+slf4j-provider = { group = "org.slf4j", name = "slf4j-jdk14", version.ref = "slf4j" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow"}
