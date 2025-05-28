@@ -64,10 +64,15 @@ class Logger private constructor(val name: String, private val parent: Logger? =
         throwable?.toString()?.let { log("&c$it", LoggerLevel.WARN, "") }
         throwable?.stackTrace?.forEach { log("&c$it", LoggerLevel.WARN, "") }
     }
+
+    fun debug(message: String) {
+        log(message, LoggerLevel.DEBUG)
+    }
 }
 
 enum class LoggerLevel {
     INFO,
     WARN,
-    ERROR
+    ERROR,
+    DEBUG
 }
