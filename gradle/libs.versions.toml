@@ -2,6 +2,9 @@
 # Libraries
 jansi = "2.4.1"
 slf4j = "2.0.17"
+kord = "0.15.0"
+guava = "33.4.7-jre"
+reflections = "3d340414a7"
 
 # Plugins
 shadow = "8.3.6"
@@ -9,6 +12,9 @@ shadow = "8.3.6"
 [libraries]
 jansi = { group = "org.fusesource.jansi", name = "jansi", version.ref = "jansi" }
 slf4j-provider = { group = "org.slf4j", name = "slf4j-jdk14", version.ref = "slf4j" }
+kord = { group = "dev.kord", name = "kord-core", version.ref = "kord" }
+guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
+reflections = { group = "com.github.Adrigamer2950", name = "reflections", version.ref = "reflections" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow"}

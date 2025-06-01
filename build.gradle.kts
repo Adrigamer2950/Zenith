@@ -10,11 +10,18 @@ version = property("version") as String
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io") {
+        name = "JitPack"
+    }
 }
 
 dependencies {
-    implementation(libs.slf4j.provider)
-    implementation(libs.jansi)
+    api(libs.slf4j.provider)
+    api(libs.jansi)
+    api(libs.guava)
+    api(libs.reflections)
+
+    api(libs.kord)
 }
 
 kotlin {
