@@ -5,7 +5,7 @@ import kotlin.reflect.KClass
 
 interface EventHandler {
 
-    fun loadEvents();
+    fun loadEvents()
 
     fun registerListener(clazz: KClass<out Listener<*>>)
 
