@@ -35,3 +35,21 @@ tasks.named<ShadowJar>("shadowJar") {
 tasks.named("build") {
     finalizedBy(tasks.shadowJar)
 }
+
+sourceSets {
+    create("exampleMain") {
+        kotlin.srcDir("src/exampleMain/kotlin")
+        resources.srcDir("src/exampleMain/resources")
+
+        compileClasspath += sourceSets["main"].compileClasspath
+        compileClasspath += sourceSets["main"].output
+
+        runtimeClasspath += sourceSets["main"].runtimeClasspath
+        runtimeClasspath += sourceSets["main"].output
+    }
+}
+
+tasks.register<JavaExec>("runExample") {
+    mainClass.set("me.adrigamer2950.zenith.example.MainKt")
+    classpath = sourceSets["exampleMain"].runtimeClasspath
+}
