@@ -1,4 +1,4 @@
-package me.adrigamer2950.zenith
+package me.adrigamer2950.zenith.util
 
 import org.reflections.Reflections
 import org.reflections.util.ConfigurationBuilder

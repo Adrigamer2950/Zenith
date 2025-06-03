@@ -3,7 +3,7 @@ package me.adrigamer2950.zenith.events.handler
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import dev.kord.core.on
-import me.adrigamer2950.zenith.ReflectionsUtil
+import me.adrigamer2950.zenith.util.ReflectionsUtil
 import me.adrigamer2950.zenith.client.Client
 import me.adrigamer2950.zenith.events.Listener
 import me.adrigamer2950.zenith.getTypeClass
