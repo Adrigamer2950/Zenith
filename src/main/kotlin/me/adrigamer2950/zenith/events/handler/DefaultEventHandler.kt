@@ -21,7 +21,7 @@ class DefaultEventHandler(builder: DefaultEventHandlerBuilder.() -> Unit) : Even
     private val logger = this.builder.logger
     private val packageToSearch: String = this.builder.packageName ?: throw IllegalArgumentException("Package cannot be null")
 
-    private val listeners: Multimap<KClass<out Listener<*>>, Listener<*>> = HashMultimap.create()
+    private val listeners: Multimap<KClass<out Listener<*, *>>, Listener<*, *>> = HashMultimap.create()
 
     init {
         logger.debug("Registering internal listener...")
@@ -45,7 +45,7 @@ class DefaultEventHandler(builder: DefaultEventHandlerBuilder.() -> Unit) : Even
             }
     }
 
-    override fun registerListener(clazz: KClass<out Listener<*>>) {
+    override fun registerListener(clazz: KClass<out Listener<*, *>>) {
         if (!clazz.hasNoArgConstructor()) {
             logger.warn("&c${clazz.simpleName} cannot be auto-registered because it doesn't have a no-arg constructor")
             return
@@ -62,8 +62,8 @@ class DefaultEventHandler(builder: DefaultEventHandlerBuilder.() -> Unit) : Even
         client.kord.on<dev.kord.core.event.Event> {
             listeners.entries()
                 .filter { it.key.getTypeClass() == this::class }
-                .mapNotNull { it.value as? Listener<dev.kord.core.event.Event> }
-                .forEach { it.execute(this) }
+                .mapNotNull { it.value as? Listener<dev.kord.core.event.Event, Client> }
+                .forEach { it.execute(this, client) }
         }
     }
 }

@@ -7,9 +7,9 @@ interface EventHandler {
 
     fun loadEvents()
 
-    fun registerListener(clazz: KClass<out Listener<*>>)
+    fun registerListener(clazz: KClass<out Listener<*, *>>)
 
-    fun registerListener(listener: Listener<*>) {
+    fun registerListener(listener: Listener<*, *>) {
         registerListener(listener::class)
     }
 }
