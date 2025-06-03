@@ -10,7 +10,7 @@ import me.adrigamer2950.zenith.logger.Logger
  */
 abstract class AbstractClient(builder: ClientBuilder.() -> Unit) : Client {
 
-    abstract override val logger: Logger
+    override val logger: Logger = Logger.getLogger(this::class)
 
     protected val clientBuilder: ClientBuilder = ClientBuilder().apply(builder)
     protected val token: String = clientBuilder.token ?: throw IllegalArgumentException("Token cannot be null")

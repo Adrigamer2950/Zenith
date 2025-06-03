@@ -4,15 +4,12 @@ import dev.kord.core.Kord
 import kotlinx.coroutines.runBlocking
 import me.adrigamer2950.zenith.events.handler.DefaultEventHandler
 import me.adrigamer2950.zenith.events.handler.EventHandler
-import me.adrigamer2950.zenith.logger.Logger
 
 /**
  * Represents a client that provides a default implementation
  * so it can be used directly without needing to extend it.
  */
 open class DefaultClient(builder: ClientBuilder.() -> Unit) : AbstractClient(builder) {
-
-    override val logger: Logger = Logger.getLogger()
 
     override val kord = createKordInstance()
 
