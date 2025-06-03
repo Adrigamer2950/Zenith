@@ -12,7 +12,7 @@ import me.adrigamer2950.zenith.events.handler.EventHandler
 open class DefaultClient(builder: ClientBuilder.() -> Unit) : AbstractClient(builder) {
 
     override val eventHandler: EventHandler = DefaultEventHandler {
-        packageName = clientBuilder.eventsPackage
+        packageName = clientBuilder.autoRegisterBuilder?.eventsPackage
     }
 
     override val kord = createKordInstance()
