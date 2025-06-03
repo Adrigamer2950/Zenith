@@ -1,6 +1,7 @@
 package me.adrigamer2950.zenith.client
 
 import dev.kord.gateway.builder.LoginBuilder
+import me.adrigamer2950.zenith.logger.Logger
 
 /**
  * Represents an abstract client that provides
@@ -8,6 +9,8 @@ import dev.kord.gateway.builder.LoginBuilder
  * be extended for proper implementation.
  */
 abstract class AbstractClient(builder: ClientBuilder.() -> Unit) : Client {
+
+    abstract override val logger: Logger
 
     protected val clientBuilder: ClientBuilder = ClientBuilder().apply(builder)
     protected val token: String = clientBuilder.token ?: throw IllegalArgumentException("Token cannot be null")

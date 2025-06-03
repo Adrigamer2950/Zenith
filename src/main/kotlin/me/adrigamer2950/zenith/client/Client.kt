@@ -11,7 +11,6 @@ import me.adrigamer2950.zenith.logger.Logger
 interface Client {
 
     val logger: Logger
-        get() = Logger.getLogger()
 
     val eventHandler: EventHandler
 
