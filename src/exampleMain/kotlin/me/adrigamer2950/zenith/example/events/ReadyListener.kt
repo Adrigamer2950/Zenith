@@ -2,7 +2,7 @@ package me.adrigamer2950.zenith.example.events
 
 import dev.kord.core.event.gateway.ReadyEvent
 import me.adrigamer2950.zenith.client.Client
-import me.adrigamer2950.zenith.events.Listener
+import me.adrigamer2950.zenith.event.Listener
 
 class ReadyListener : Listener<ReadyEvent, Client>() {
 

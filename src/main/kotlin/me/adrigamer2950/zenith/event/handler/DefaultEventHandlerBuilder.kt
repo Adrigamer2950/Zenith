@@ -1,4 +1,4 @@
-package me.adrigamer2950.zenith.events.handler
+package me.adrigamer2950.zenith.event.handler
 
 import me.adrigamer2950.zenith.client.Client
 import me.adrigamer2950.zenith.logger.Logger

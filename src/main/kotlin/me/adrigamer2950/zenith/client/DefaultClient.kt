@@ -2,8 +2,8 @@ package me.adrigamer2950.zenith.client
 
 import dev.kord.core.Kord
 import kotlinx.coroutines.runBlocking
-import me.adrigamer2950.zenith.events.handler.DefaultEventHandler
-import me.adrigamer2950.zenith.events.handler.EventHandler
+import me.adrigamer2950.zenith.event.handler.DefaultEventHandler
+import me.adrigamer2950.zenith.event.handler.EventHandler
 
 /**
  * Represents a client that provides a default implementation

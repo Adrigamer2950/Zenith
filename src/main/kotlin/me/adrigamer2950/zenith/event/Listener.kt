@@ -1,4 +1,4 @@
-package me.adrigamer2950.zenith.events
+package me.adrigamer2950.zenith.event
 
 import dev.kord.core.event.Event
 import me.adrigamer2950.zenith.client.Client

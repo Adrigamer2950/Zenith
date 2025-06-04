@@ -2,7 +2,7 @@ package me.adrigamer2950.zenith.client
 
 import dev.kord.core.Kord
 import dev.kord.gateway.builder.LoginBuilder
-import me.adrigamer2950.zenith.events.handler.EventHandler
+import me.adrigamer2950.zenith.event.handler.EventHandler
 import me.adrigamer2950.zenith.logger.Logger
 
 /**

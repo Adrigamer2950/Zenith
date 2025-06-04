@@ -1,11 +1,11 @@
-package me.adrigamer2950.zenith.events.handler
+package me.adrigamer2950.zenith.event.handler
 
 import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
 import dev.kord.core.on
 import me.adrigamer2950.zenith.util.ReflectionsUtil
 import me.adrigamer2950.zenith.client.Client
-import me.adrigamer2950.zenith.events.Listener
+import me.adrigamer2950.zenith.event.Listener
 import me.adrigamer2950.zenith.getTypeClass
 import me.adrigamer2950.zenith.hasNoArgConstructor
 import me.adrigamer2950.zenith.runAndReturnError

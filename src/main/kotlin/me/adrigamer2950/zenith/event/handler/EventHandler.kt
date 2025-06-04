@@ -1,6 +1,6 @@
-package me.adrigamer2950.zenith.events.handler
+package me.adrigamer2950.zenith.event.handler
 
-import me.adrigamer2950.zenith.events.Listener
+import me.adrigamer2950.zenith.event.Listener
 import kotlin.reflect.KClass
 
 interface EventHandler {
