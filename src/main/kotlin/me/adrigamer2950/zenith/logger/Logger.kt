@@ -1,68 +1,78 @@
 package me.adrigamer2950.zenith.logger
 
-import me.adrigamer2950.zenith.util.StackUtil
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.minimessage.MiniMessage
+import net.kyori.adventure.text.serializer.ansi.ANSIComponentSerializer
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
-class Logger private constructor(val name: String, private val parent: Logger? = null, private val useColors: Boolean = true) {
+class Logger internal constructor(val name: String) {
 
     companion object {
-        @JvmStatic
-        val cachedLoggers = mutableListOf<Logger>()
+        private val ansiSerializer = ANSIComponentSerializer.ansi()
+        private val miniMessageSerializer = MiniMessage.miniMessage()
+
+        private const val CHARS_BETWEEN_LEVEL_AND_NAME = 5
+        private const val CHARS_BETWEEN_NAME_AND_LOG = 20
+
+        private val loggers: MutableMap<KClass<*>, Logger> = mutableMapOf()
 
         @JvmStatic
-        fun getLogger(parent: Logger? = null, useColors: Boolean = true, cache: Boolean = true): Logger {
-            return getLogger(StackUtil.getCallerClass(), parent, useColors, cache)
-        }
+        fun getLogger(klass: KClass<*>): Logger {
+            return loggers[klass] ?: run {
+                val logger = Logger(klass.simpleName ?: "Unknown")
 
-        @JvmStatic
-        fun getLogger(clazz: KClass<*>, parent: Logger? = null, useColors: Boolean = true, cache: Boolean = true): Logger {
-            if (clazz.simpleName == null)
-                throw IllegalArgumentException("${clazz.simpleName} cannot be null")
+                loggers[klass] = logger
 
-            val name = clazz.simpleName!!
-
-            if (cache)
-                cachedLoggers.firstOrNull { it.name == name }?.let {
-                    return it
-                }
-
-            val logger = Logger(name, parent, useColors)
-
-            if (cache)
-                cachedLoggers.add(logger)
-
-            return logger
+                logger
+            }
         }
     }
 
-    private fun log(message: String, level: LoggerLevel, name: String = "[${this.name}] ") {
-        val time = LocalTime.now()
+    fun log(message: Component, level: LoggerLevel) {
+        internalLog(message, level)
+    }
 
-        println(
-            "[${time.format(DateTimeFormatter.ofPattern("HH:mm:ss"))} $level] ${if (parent != null) "[${parent.name}] " else ""}$name${
-                if (useColors) Colors.translate(message) else message
-            }"
-        )
+    fun log(message: String, level: LoggerLevel) {
+        internalLog(message, level)
+    }
+
+    internal fun internalLog(message: String, level: LoggerLevel, includeInfo: Boolean = true) {
+        internalLog(miniMessageSerializer.deserialize(message), level, includeInfo)
+    }
+
+    internal fun internalLog(message: Component, level: LoggerLevel, includeInfo: Boolean = true) {
+        val logToConsole = if (includeInfo) {
+            val time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+            val spaces1 = " ".repeat((CHARS_BETWEEN_LEVEL_AND_NAME - level.name.length).coerceAtLeast(0))
+            val spaces2 = " ".repeat((CHARS_BETWEEN_NAME_AND_LOG - name.length).coerceAtLeast(0))
+
+            miniMessageSerializer.deserialize("<white><aqua>$time</aqua> | ${level.colored}$spaces1 | $name$spaces2 | </white><reset>")
+                .append(message)
+        } else {
+            message
+        }
+
+        println(ansiSerializer.serialize(logToConsole))
     }
 
     fun info(message: String) {
         log(message, LoggerLevel.INFO)
     }
 
-    fun warn(message: String = "Something has occurred", throwable: Throwable? = null) {
-        log("&6$message", LoggerLevel.WARN)
+    fun warn(message: String, throwable: Throwable? = null) {
+        log("<gold>$message", LoggerLevel.WARN)
 
-        throwable?.toString()?.let { log("&6$it", LoggerLevel.WARN, "") }
-        throwable?.stackTrace?.forEach { log("&6$it", LoggerLevel.WARN, "") }
+        throwable?.toString()?.let { internalLog("<gold>$it</gold>", LoggerLevel.WARN, false) }
+        throwable?.stackTrace?.forEach { internalLog("<gold>$it</gold>", LoggerLevel.WARN, false) }
     }
 
     fun error(message: String = "An error has occurred", throwable: Throwable? = null) {
-        log("&c$message", LoggerLevel.ERROR)
+        log("<red>$message", LoggerLevel.ERROR)
 
-        throwable?.toString()?.let { log("&c$it", LoggerLevel.WARN, "") }
-        throwable?.stackTrace?.forEach { log("&c$it", LoggerLevel.WARN, "") }
+        throwable?.toString()?.let { internalLog("<red>$it</red>", LoggerLevel.WARN, false) }
+        throwable?.stackTrace?.forEach { internalLog("<red>$it</red>", LoggerLevel.WARN, false) }
     }
 
     fun debug(message: String) {
@@ -70,9 +80,9 @@ class Logger private constructor(val name: String, private val parent: Logger? =
     }
 }
 
-enum class LoggerLevel {
-    INFO,
-    WARN,
-    ERROR,
-    DEBUG
+enum class LoggerLevel(val colored: String) {
+    INFO("<aqua>INFO</aqua>"),
+    WARN("<yellow>WARN</yellow>"),
+    ERROR("<red>ERROR</red>"),
+    DEBUG("<green>DEBUG</green>"),
 }

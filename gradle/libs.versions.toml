@@ -5,6 +5,7 @@ slf4j = "2.0.17"
 kord = "0.15.0"
 guava = "33.4.7-jre"
 reflections = "3d340414a7"
+adventure-api = "4.24.0"
 
 # Plugins
 shadow = "8.3.6"
@@ -15,6 +16,9 @@ slf4j-provider = { group = "org.slf4j", name = "slf4j-jdk14", version.ref = "slf
 kord = { group = "dev.kord", name = "kord-core", version.ref = "kord" }
 guava = { group = "com.google.guava", name = "guava", version.ref = "guava" }
 reflections = { group = "com.github.Adrigamer2950", name = "reflections", version.ref = "reflections" }
+adventure-api = { group = "net.kyori", name = "adventure-api", version.ref = "adventure-api" }
+adventure-minimessage = { group = "net.kyori", name = "adventure-text-minimessage", version.ref = "adventure-api" }
+adventure-ansi = { group = "net.kyori", name = "adventure-text-serializer-ansi", version.ref = "adventure-api" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow"}

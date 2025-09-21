@@ -22,6 +22,10 @@ dependencies {
     api(libs.reflections)
 
     api(libs.kord)
+
+    api(libs.adventure.api)
+    api(libs.adventure.minimessage)
+    api(libs.adventure.ansi)
 }
 
 kotlin {
