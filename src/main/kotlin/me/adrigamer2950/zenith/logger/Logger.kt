@@ -16,6 +16,14 @@ class Logger internal constructor(val name: String) {
         private const val CHARS_BETWEEN_LEVEL_AND_NAME = 5
         private const val CHARS_BETWEEN_NAME_AND_LOG = 20
 
+        val isDebugEnabled = run {
+            if (System.getProperty("zenith.debug")?.toBoolean() == true) return@run true
+
+            val env = runCatching { System.getenv("ZENITH_DEBUG") }.getOrNull() ?: return@run false
+
+            return@run env.toBoolean() || env == "1"
+        }
+
         private val loggers: MutableMap<KClass<*>, Logger> = mutableMapOf()
 
         @JvmStatic
@@ -76,6 +84,8 @@ class Logger internal constructor(val name: String) {
     }
 
     fun debug(message: String) {
+        if (!isDebugEnabled) return
+
         log(message, LoggerLevel.DEBUG)
     }
 }
