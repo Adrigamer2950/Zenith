@@ -1,0 +1,28 @@
+package me.adrigamer2950.zenith.command
+
+import dev.kord.core.entity.interaction.ChatInputCommandInteraction
+import dev.kord.core.event.interaction.GuildChatInputCommandInteractionCreateEvent
+import dev.kord.rest.builder.interaction.GlobalChatInputCreateBuilder
+import kotlinx.coroutines.runBlocking
+import me.adrigamer2950.zenith.client.Client
+
+abstract class ChatCommand<C : Client>(
+    override val name: String,
+    val description: String,
+    val builder: GlobalChatInputCreateBuilder.() -> Unit = {}
+) : Command<ChatCommandEvent, ChatInputCommandInteraction, C> {
+
+    override fun register(client: C) {
+        client.commandHandler.logger.debug("Registering chat command ${this::class.simpleName}")
+
+        runBlocking {
+            client.kord.createGlobalChatInputCommand(
+                this@ChatCommand.name,
+                this@ChatCommand.description,
+                this@ChatCommand.builder
+            )
+        }
+    }
+}
+
+typealias ChatCommandEvent = GuildChatInputCommandInteractionCreateEvent
