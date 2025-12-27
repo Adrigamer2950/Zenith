@@ -1,5 +1,6 @@
 package me.adrigamer2950.zenith.command.handler
 
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import me.adrigamer2950.zenith.client.Client
 import me.adrigamer2950.zenith.command.Command
@@ -19,14 +20,7 @@ class DefaultCommandHandler(builder: DefaultCommandHandlerBuilder.() -> Unit) : 
     override val commands: MutableList<Command<*, *, *>> = mutableListOf()
 
     override fun loadCommands() {
-        logger.info("Removing old commands...")
-
-        runBlocking {
-            client.kord.getGlobalApplicationCommands().collect {
-                logger.debug("Deleting command: ${it.name} (${it.id})")
-                it.delete()
-            }
-        }
+        val oldCommands = runBlocking { client.kord.getGlobalApplicationCommands().toList() }
 
         logger.info("Loading commands...")
 
@@ -38,6 +32,19 @@ class DefaultCommandHandler(builder: DefaultCommandHandlerBuilder.() -> Unit) : 
                     logger.error("An error has occurred while registering ${it.simpleName}", throwable)
                 }
             }
+
+        logger.info("Removing old commands...")
+
+        runBlocking {
+            oldCommands.forEach { old ->
+                commands.firstOrNull { cmd -> old.name == cmd.name }?.let {
+                    return@forEach
+                }
+
+                logger.debug("Unregistering removed command: ${old.name} (${old.id})")
+                old.delete()
+            }
+        }
     }
 
     override fun registerCommand(command: Command<*, *, *>) {
