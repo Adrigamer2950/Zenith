@@ -54,6 +54,6 @@ sourceSets {
 }
 
 tasks.register<JavaExec>("runExample") {
-    mainClass.set("me.adrigamer2950.zenith.example.MainKt")
+    mainClass.set("me.devadri.zenith.example.MainKt")
     classpath = sourceSets["exampleMain"].runtimeClasspath
 }
