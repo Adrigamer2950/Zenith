@@ -7,8 +7,21 @@ plugins {
     id("maven-publish")
 }
 
+val versionIsBeta = (property("version") as String).toDefaultLowerCase().contains("beta")
+
 group = "me.devadri.zenith"
-version = property("version") as String
+version = property("version") as String +
+        if (versionIsBeta)
+            "-${getGitCommitHash()}"
+        else ""
+
+fun getGitCommitHash(): String {
+    val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
+        .redirectErrorStream(true)
+        .start()
+
+    return process.inputStream.bufferedReader().readText().trim()
+}
 
 repositories {
     mavenCentral()
@@ -59,8 +72,6 @@ tasks.register<JavaExec>("runExample") {
     mainClass.set("me.devadri.zenith.example.MainKt")
     classpath = sourceSets["exampleMain"].runtimeClasspath
 }
-
-val versionIsBeta = (properties.get("version") as String).toDefaultLowerCase().contains("beta")
 
 val sourcesImplementation = configurations.create("sourcesImplementation")
 
