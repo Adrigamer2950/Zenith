@@ -7,9 +7,9 @@ env:
   COMMIT_MESSAGE: "${{ github.event.head_commit.message }}"
 
 jobs:
-  build:
+  publish:
     if: github.repository == 'Adrigamer2950/Zenith'
-    name: Build
+    name: Publish
     runs-on: ubuntu-latest
 
     permissions:
