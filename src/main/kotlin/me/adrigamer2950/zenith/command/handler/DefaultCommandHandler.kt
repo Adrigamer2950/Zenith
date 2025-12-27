@@ -32,8 +32,6 @@ class DefaultCommandHandler(builder: DefaultCommandHandlerBuilder.() -> Unit) : 
 
         ReflectionsUtil.searchForAllClasses(this.packageToSearch, Command::class)
             .forEach {
-                logger.debug("Found Command class: ${it.qualifiedName}")
-
                 if (Modifier.isAbstract(it.java.modifiers)) return@forEach
 
                 runAndReturnError { registerCommand(it) }.error?.let { throwable ->
