@@ -14,7 +14,7 @@ class Logger internal constructor(val name: String) {
         private val miniMessageSerializer = MiniMessage.miniMessage()
 
         private const val CHARS_BETWEEN_LEVEL_AND_NAME = 5
-        private const val CHARS_BETWEEN_NAME_AND_LOG = 20
+        private const val CHARS_BETWEEN_NAME_AND_LOG = 22
 
         val isDebugEnabled = run {
             if (System.getProperty("zenith.debug")?.toBoolean() == true) return@run true
