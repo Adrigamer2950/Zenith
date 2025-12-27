@@ -12,8 +12,6 @@ abstract class UserCommand<C : Client>(
 ) : Command<UserCommandEvent, UserCommandInteraction, C> {
 
     override fun register(client: C) {
-        client.commandHandler.logger.debug("Registering user command ${this::class.simpleName}")
-
         runBlocking {
             client.kord.createGlobalUserCommand(this@UserCommand.name, this@UserCommand.builder)
         }

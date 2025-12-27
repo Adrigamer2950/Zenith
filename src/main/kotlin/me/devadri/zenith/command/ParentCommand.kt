@@ -32,8 +32,6 @@ abstract class ParentCommand<C : Client>(
     }
 
     override fun register(client: C) {
-        client.commandHandler.logger.debug("Registering parent command ${this::class.simpleName}")
-
         runBlocking {
             client.kord.createGlobalChatInputCommand(
                 this@ParentCommand.name,

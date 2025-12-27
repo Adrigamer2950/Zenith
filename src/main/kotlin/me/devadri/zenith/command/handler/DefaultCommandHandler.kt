@@ -61,7 +61,7 @@ class DefaultCommandHandler(builder: DefaultCommandHandlerBuilder.() -> Unit) : 
             return
         }
 
-        logger.debug("Command ${command.name} registered successfully")
+        logger.debug("Command '${command.name}' registered successfully")
 
         commands.add(command)
     }

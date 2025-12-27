@@ -13,8 +13,6 @@ abstract class ChatCommand<C : Client>(
 ) : Command<ChatCommandEvent, ChatInputCommandInteraction, C> {
 
     override fun register(client: C) {
-        client.commandHandler.logger.debug("Registering chat command ${this::class.simpleName}")
-
         runBlocking {
             client.kord.createGlobalChatInputCommand(
                 this@ChatCommand.name,
