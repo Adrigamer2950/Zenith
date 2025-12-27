@@ -3,8 +3,8 @@ package me.devadri.zenith.example.events
 import dev.kord.core.behavior.interaction.respondEphemeral
 import me.devadri.zenith.client.Client
 import me.devadri.zenith.command.Command
-import me.devadri.zenith.command.UserCommand
-import me.devadri.zenith.command.UserCommandEvent
+import me.devadri.zenith.command.impl.UserCommand
+import me.devadri.zenith.command.impl.UserCommandEvent
 import me.devadri.zenith.event.Listener
 
 class CommandUserEvent : Listener<UserCommandEvent, Client>() {

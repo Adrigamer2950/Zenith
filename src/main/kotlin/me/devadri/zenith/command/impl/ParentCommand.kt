@@ -1,9 +1,10 @@
-package me.devadri.zenith.command
+package me.devadri.zenith.command.impl
 
 import dev.kord.rest.builder.interaction.GlobalChatInputCreateBuilder
 import dev.kord.rest.builder.interaction.subCommand
 import kotlinx.coroutines.runBlocking
 import me.devadri.zenith.client.Client
+import me.devadri.zenith.command.Command
 
 abstract class ParentCommand<C : Client>(
     override val name: String,

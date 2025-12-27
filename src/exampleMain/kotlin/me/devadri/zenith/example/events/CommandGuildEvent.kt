@@ -2,10 +2,10 @@ package me.devadri.zenith.example.events
 
 import dev.kord.core.behavior.interaction.respondEphemeral
 import me.devadri.zenith.client.Client
-import me.devadri.zenith.command.ChatCommand
-import me.devadri.zenith.command.ChatCommandEvent
+import me.devadri.zenith.command.impl.ChatCommand
+import me.devadri.zenith.command.impl.ChatCommandEvent
 import me.devadri.zenith.command.Command
-import me.devadri.zenith.command.ParentCommand
+import me.devadri.zenith.command.impl.ParentCommand
 import me.devadri.zenith.event.Listener
 import me.devadri.zenith.util.CommandInteractionPair
 import me.devadri.zenith.util.CommandUtil

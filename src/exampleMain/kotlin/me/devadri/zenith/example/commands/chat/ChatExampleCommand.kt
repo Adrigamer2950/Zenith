@@ -3,8 +3,8 @@ package me.devadri.zenith.example.commands.chat
 import dev.kord.core.behavior.interaction.respondEphemeral
 import dev.kord.core.entity.interaction.ChatInputCommandInteraction
 import me.devadri.zenith.client.DefaultClient
-import me.devadri.zenith.command.ChatCommand
-import me.devadri.zenith.command.ChatCommandEvent
+import me.devadri.zenith.command.impl.ChatCommand
+import me.devadri.zenith.command.impl.ChatCommandEvent
 
 class ChatExampleCommand : ChatCommand<DefaultClient>("chat", "Example chat command") {
 

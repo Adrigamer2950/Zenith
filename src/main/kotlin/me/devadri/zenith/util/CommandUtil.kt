@@ -4,8 +4,8 @@ import dev.kord.common.entity.optional.Optional
 import dev.kord.common.entity.optional.OptionalBoolean
 import dev.kord.core.entity.interaction.InteractionCommand
 import me.devadri.zenith.command.Command
-import me.devadri.zenith.command.ParentCommand
-import me.devadri.zenith.command.SubCommand
+import me.devadri.zenith.command.impl.ParentCommand
+import me.devadri.zenith.command.impl.SubCommand
 
 object CommandUtil {
 

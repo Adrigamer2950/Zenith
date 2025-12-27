@@ -1,10 +1,11 @@
-package me.devadri.zenith.command
+package me.devadri.zenith.command.impl
 
 import dev.kord.core.entity.interaction.ChatInputCommandInteraction
 import dev.kord.core.event.interaction.GuildChatInputCommandInteractionCreateEvent
 import dev.kord.rest.builder.interaction.GlobalChatInputCreateBuilder
 import kotlinx.coroutines.runBlocking
 import me.devadri.zenith.client.Client
+import me.devadri.zenith.command.Command
 
 abstract class ChatCommand<C : Client>(
     override val name: String,
