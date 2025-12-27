@@ -22,4 +22,5 @@ class ClientBuilder {
 
 class AutoRegisterBuilder {
     var eventsPackage: String? = null
+    var commandsPackage: String? = null
 }
